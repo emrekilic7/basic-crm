@@ -1,0 +1,3 @@
+/*
+    Added for Tailwind CSS IntelliSense
+*/

@@ -1,6 +1,6 @@
 <div>
     <section class="bg-white dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+        <div class="container mx-auto p-4 w-full">
             @guest
                 <div class="mx-auto max-w-screen-sm text-center">
                     <h2 class="mb-4 text-4xl tracking-tight font-extrabold leading-tight text-gray-900 dark:text-white">To access all features, please log in.</h2>
@@ -9,7 +9,16 @@
                 </div>
             @endguest
             @auth
-                hello!
+            <div class="grid grid-cols-3 gap-2">
+                <article
+                  class="flex items-end justify-between rounded-lg border border-gray-200 bg-white dark:bg-gray-700 dark:border-gray-600 p-6"
+                >
+                  <div>
+                    <p class="text-sm text-gray-500 dark:text-white">Customers</p>
+                    <p class="text-2xl font-medium text-gray-900 dark:text-white">0</p>
+                  </div>
+                </article>
+            </div>
             @endauth
         </div>
     </section>
