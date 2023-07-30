@@ -3,7 +3,7 @@
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Index;
 use App\Http\Livewire\Customer\Index as CustomerIndex;
-use App\Http\Livewire\Customer\Create as CustomerCreate;
+use App\Http\Livewire\Customer\Edit as CustomerEdit;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,5 +26,5 @@ Route::get('login', Login::class)->name('login')->middleware('guest');
 /* Customer */
 Route::middleware(['auth'])->group(function () {
     Route::get('customer', CustomerIndex::class)->name('customer.index');
-    Route::get('customer/create', CustomerCreate::class)->name('customer.create');
+    Route::get('customer/{customer}/edit', CustomerEdit::class)->name('customer.edit');
 });

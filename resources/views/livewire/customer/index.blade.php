@@ -69,7 +69,7 @@
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            <a href="{{ route('customer.edit', $customer->uuid ) }}"><x-button.primary class="text-xs">Edit</x-button.primary></a>
                         </td>
                     </tr>
                 @endforeach
@@ -77,7 +77,7 @@
         </table>
 
         <div class="p-2">
-            {{ $customers->links() }}
+            {{ $customers->links('pagination::tailwind') }}
         </div>
     </div>
 </div>

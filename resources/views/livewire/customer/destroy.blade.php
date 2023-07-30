@@ -1,0 +1,1 @@
+<x-button.danger class="text-sm" wire:click="destroy">Deactivate</x-button.danger>

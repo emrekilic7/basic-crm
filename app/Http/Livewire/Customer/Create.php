@@ -15,16 +15,16 @@ class Create extends Component
     public $provincesData, $selectedCity;
     public $openModal = false;
 
+    public function mount()
+    {
+        $this->getProvincesData();
+    }
+
     protected $rules = [
         'name' => 'required|min:3',
         'email' => 'nullable|email',
         'avatar' => 'nullable|image',
     ];
-
-    public function mount()
-    {
-        $this->getProvincesData();
-    }
 
     public function getProvincesData()
     {
@@ -62,7 +62,11 @@ class Create extends Component
             'district' => $this->district,
         ]);
 
-        session()->flash('success', 'Customer successfully created.');
+        $this->dispatchBrowserEvent('created', [
+            'title'     => 'Customer successfully created.',
+            'icon'      => 'success',
+            'iconColor' => 'green',
+        ]);
 
         $this->reset();
         $this->emit('saved');

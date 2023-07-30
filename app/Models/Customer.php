@@ -25,9 +25,14 @@ class Customer extends Model
 
     public static function search($search)
     {
-        return empty($search) ? static::query()->withTrashed()
-            : static::query()->withTrashed()->where('name', 'like', '%'.$search.'%')
+        return empty($search) ? static::query()
+            : static::query()->where('name', 'like', '%'.$search.'%')
             ->orWhere('surname', 'like', '%'.$search.'%')
             ->orWhere('email', 'like', '%'.$search.'%');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 }

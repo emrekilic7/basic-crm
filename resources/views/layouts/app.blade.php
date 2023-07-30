@@ -9,6 +9,7 @@
 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @livewireStyles
 </head>
@@ -22,5 +23,26 @@
     @include('layouts.partials.footer')
 
     @livewireScripts
+
+    <script>
+        const sweetAlertFire = function(e) {
+            Swal.fire({
+                title: e.detail.title
+                , icon: e.detail.icon
+                , iconColor: e.detail.iconColor
+                , timer: 3000
+                , toast: true
+                , position: 'top-right'
+                , timerProgressBar: true
+                , showConfirmButton: false
+            , });
+        }
+
+        window.addEventListener('created', sweetAlertFire, false);
+        window.addEventListener('updated', sweetAlertFire, false);
+        window.addEventListener('deleted', sweetAlertFire, false);
+    </script>
+
+    @stack('scripts')
 </body>
 </html>
