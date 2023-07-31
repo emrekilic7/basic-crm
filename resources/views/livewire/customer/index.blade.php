@@ -11,13 +11,13 @@
                     <option value="created_at">Created At</option>
                 </x-form.select>
             </div>
-            <div class="col-span-3  md:col-span-2">
+            <div class="col-span-3 md:col-span-1">
                 <x-form.select wire:model="sortAsc" id="sortAsc">
                     <option value="1">Asc</option>
                     <option value="0">Desc</option>
                 </x-form.select>
             </div>
-            <div class="col-span-2">
+            <div class="col-span-2 md:col-span-1">
                 <x-form.select wire:model="perPage" id="perPage">
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -25,6 +25,14 @@
                     <option value="50">50</option>
                 </x-form.select>
             </div>
+
+            <div class="col-span-8 md:col-span-2">
+                <x-form.select wire:model="isDeleted" id="isDeleted">
+                    <option value="0">Active Customers</option>
+                    <option value="1">All Customers</option>
+                </x-form.select>
+            </div>
+
             <div class="col-span-8 md:col-span-2">
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative">
@@ -50,11 +58,17 @@
             </thead>
             <tbody>
                 @foreach ($customers as $customer)
-                    <tr
+                    <tr wire:key='{{ $customer->id }}'
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row"
                             class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            {{-- <img class="w-10 h-10 rounded-full" src="/"> --}}
+                            @if($customer->avatar)
+                            <img class="w-10 h-10 rounded-full" src="{{ $customer->src }}">
+                            @else
+                            <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            @endif
                             <div class="pl-3">
                                 <div class="text-base font-semibold">{{ $customer->name. " ".$customer->surname }}</div>
                                 <div class="font-normal text-gray-500">{{ $customer->email }}</div>
@@ -64,7 +78,7 @@
                             {{ $customer->created_at->format('d.m.Y H:i') }}
                         </td>
                         <td class="px-6 py-4">
-                            <div class="flex items-center" x-data="{ isDeleted: {{ $customer->deleted_at ? 'true' : 'false' }} }">
+                            <div class="flex items-center" x-data="{ isDeleted: {{ $customer->deleted_at ? 'true' : 'false' }} }" >
                                 <div :class="{'bg-red-500' : isDeleted, 'bg-green-500': !isDeleted}" class="h-2.5 w-2.5 rounded-full mr-2"></div> {{ $customer->deleted_at ? 'Inactive' : 'Active' }}
                             </div>
                         </td>

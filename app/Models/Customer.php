@@ -20,15 +20,28 @@ class Customer extends Model
         'phone',
         'address',
         'province',
-        'district'
+        'district',
+        'deleted_at'
     ];
 
-    public static function search($search)
+    protected $appends = ['src'];
+
+    public static function search($search, $isDeleted)
     {
-        return empty($search) ? static::query()
+        $query = empty($search) ? static::query()
             : static::query()->where('name', 'like', '%'.$search.'%')
             ->orWhere('surname', 'like', '%'.$search.'%')
             ->orWhere('email', 'like', '%'.$search.'%');
+
+        if ($isDeleted) {
+            $query->withTrashed();
+        }
+
+        return $query;
+    }
+
+    public function getSrcAttribute() {
+        return asset("storage/{$this->avatar}");
     }
 
     public function getRouteKeyName()

@@ -41,6 +41,7 @@
         window.addEventListener('created', sweetAlertFire, false);
         window.addEventListener('updated', sweetAlertFire, false);
         window.addEventListener('deleted', sweetAlertFire, false);
+        window.addEventListener('restored', sweetAlertFire, false);
     </script>
 
     @stack('scripts')
